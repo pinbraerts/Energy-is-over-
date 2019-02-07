@@ -82,57 +82,33 @@ void Player::render(Engine & e) {
         check_collisions(e, *widget);
     }
 
-#if 0
-    speed.x = e.input.x - x;
-    speed.y = e.input.y - y;
+    *this += e.physics.delta_time * speed;
 
-    speed.x /= 10;
-    speed.y /= 10;
-
-    speed.x *= e.physics.delta_time;
-    speed.y *= e.physics.delta_time;
-
-    x += speed.x;
-    y += speed.y;
-#endif
     D2D1_VECTOR_2F direction = +e.input - *this;
     normalize(direction);
 
-    *this += e.physics.delta_time * speed;
-    if (e.input.button && energy != 0) {
-        energy -= 0.001f;
+    for (size_t i = 0; i < photons.size(); ++i) {
+        photons[i] += photons[i].speed * e.physics.delta_time;
+        if (abs(nearest(e.display, photons[i]) - photons[i]) > photon_radius + photon_quant) {
+            photons.erase(photons.begin() + i);
+            photons.shrink_to_fit();
+            continue;
+        }
+        else
+            photons[i].render(e, *this);
+    }
+
+    bool can_throw_photon = e.physics.current_time - last_photon_time > time_between_photons;
+    if (e.input.button && energy != 0 && can_throw_photon) {
+        energy -= 0.1f;
         if (energy < 0) {
             energy = 0;
             // energy is out -- EIO!!!
         }
-
         float module_speed = 100;
         speed = -module_speed * direction;
-
-        // draw tail
-        D2D1_VECTOR_2F perpendicular = right_perpendicular(direction);
-        D2D1_POINT_2F point = *this + direction * radius;
-
-        ID2D1PathGeometry* tail;
-        e.directFactory->CreatePathGeometry(&tail);
-
-        ID2D1GeometrySink* sink;
-        tail->Open(&sink);
-        sink->BeginFigure(point, D2D1_FIGURE_BEGIN_HOLLOW);
-
-        for (float dist = radius; dist < radius + 100; dist += 0.1f) {
-            float perp_module = 10 * sin(10 * e.physics.current_time + dist / 4);
-            point = *this + dist * direction + perp_module * perpendicular;
-            sink->AddLine(point);
-        }
-
-        sink->EndFigure(D2D1_FIGURE_END_OPEN);
-        sink->Close();
-
-        target.DrawGeometry(tail, b);
-
-        release(tail);
-        release(sink);
+        photons.emplace_back(*this + direction * (radius + photon_quant), -2 * speed);
+        last_photon_time = e.physics.current_time;
     }
     else {
         // speed *= 0.999f;
@@ -158,7 +134,8 @@ void Player::render(Engine & e) {
     release(sink);
 
     target.DrawEllipse(D2D1::Ellipse(*this, radius, radius), a);
-    target.FillEllipse(D2D1::Ellipse(*this + radius * direction, radius / 4, radius / 4), b);
+    if(can_throw_photon)
+        target.FillEllipse(D2D1::Ellipse(*this + radius * direction, photon_radius, photon_radius), b);
 }
 
 void Player::Release() {
@@ -168,7 +145,7 @@ void Player::Release() {
 void Player::check_collisions(Engine& e, const IWidget& other) {
     if (const Rect* r = dynamic_cast<const Rect*>(&other)) {
         if (abs(nearest(*r, *this) - *this) <= radius) {
-            energy += 0.001f;
+            energy += 0.005f;
             if (energy > 1)
                 energy = 1;
         }
@@ -214,4 +191,38 @@ void Magnetic::render(Engine& e) {
 
 void Magnetic::Release() {
     release(b);
+}
+
+Player::Photon::Photon(D2D1_POINT_2F p, D2D1_VECTOR_2F s): D2D1_POINT_2F(p) {
+    speed = s;
+}
+
+void Player::Photon::render(Engine& e, Player& p) {
+    // draw tail
+    D2D1_VECTOR_2F direction = -speed;
+    normalize(direction);
+    D2D1_VECTOR_2F perpendicular = right_perpendicular(direction);
+    D2D1_POINT_2F point = *this;
+
+    ID2D1PathGeometry* tail;
+    e.directFactory->CreatePathGeometry(&tail);
+
+    ID2D1GeometrySink* sink;
+    tail->Open(&sink);
+    sink->BeginFigure(point, D2D1_FIGURE_BEGIN_HOLLOW);
+
+    for (float dist = 0; dist < p.photon_quant; dist += 0.1f) {
+        float perp_module = 7 * sin(10 * e.physics.current_time + dist / 4);
+        point = *this + dist * direction + perp_module * perpendicular;
+        sink->AddLine(point);
+    }
+
+    sink->EndFigure(D2D1_FIGURE_END_OPEN);
+    sink->Close();
+
+    e.display.renderTarget->DrawGeometry(tail, p.b);
+
+    release(tail);
+    release(sink);
+    e.display.renderTarget->FillEllipse(D2D1::Ellipse(*this, p.photon_radius, p.photon_radius), p.b);
 }

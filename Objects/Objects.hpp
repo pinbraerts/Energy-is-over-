@@ -32,7 +32,7 @@ struct RoundedRect : IWidget, D2D1_ROUNDED_RECT {
     void Release() override;
 };
 
-struct Player : IWidget, D2D1_POINT_2F, IBody {
+struct Player: IWidget, D2D1_POINT_2F, IBody {
     float radius;
     float energy = 1;
 
@@ -47,6 +47,17 @@ struct Player : IWidget, D2D1_POINT_2F, IBody {
     void Release() override;
 
     void check_collisions(Engine& e, const IWidget& other);
+
+    struct Photon: D2D1_POINT_2F, IBody {
+        Photon(D2D1_POINT_2F p, D2D1_VECTOR_2F s);
+
+        void render(Engine& e, Player& p);
+    };
+    std::vector<Photon> photons;
+    float last_photon_time = -10;
+    float time_between_photons = 0.5f;
+    float photon_quant = 100;
+    float photon_radius = 10;
 };
 
 struct Magnetic: IWidget, D2D1_RECT_F {
