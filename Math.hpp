@@ -1,11 +1,12 @@
 #ifndef EIO_MATH_HPP
 #define EIO_MATH_HPP
 
+#define _USE_MATH_DEFINES
 #include <cmath>
 #include <d2d1.h>
 #include <d2d1_1helper.h>
 
-constexpr float pi = (float)M_PI;
+constexpr float pi = 3.14159265358979323846f;
 constexpr float deg2rad = pi / 180;
 constexpr float rad2deg = 180 / pi;
 

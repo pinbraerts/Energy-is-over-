@@ -1,12 +1,12 @@
 #include "Engine.hpp"
 
 LRESULT Engine::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    Engine* sys = (Engine*)GetWindowLongPtr(hWnd, GWL_USERDATA);
+    Engine* sys = (Engine*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
     if (sys == nullptr) {
         CREATESTRUCT* cs = (CREATESTRUCT*)lParam;
         if (cs != nullptr) {
             sys = (Engine*)cs->lpCreateParams;
-            SetWindowLongPtr(hWnd, GWL_USERDATA, (LONG_PTR)sys);
+            SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG_PTR)sys);
         }
         else return DefWindowProc(hWnd, message, wParam, lParam);
     }

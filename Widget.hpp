@@ -164,7 +164,7 @@ static std::istream& operator>>(std::istream& stream, D2D1::ColorF& color) {
     std::string str;
     stream >> str;
     if (str[0] == '#') {
-        size_t c = std::stoi(str.substr(1));
+        uint32_t c = std::stoi(str.substr(1));
         color = D2D1::ColorF(c);
     }
     else {
