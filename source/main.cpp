@@ -1,5 +1,5 @@
-#include "Engine.hpp"
-#include "Resources.hpp"
+#include "../include/Engine.hpp"
+#include "../include/Resources.hpp"
 
 int CALLBACK _tWinMain(
     HINSTANCE hInst,

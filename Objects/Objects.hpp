@@ -1,8 +1,8 @@
 #ifndef EIO_OBJECTS_HPP
 #define EIO_OBJECTS_HPP
 
-#include "../Engine.hpp"
-#include "../Widget.hpp"
+#include "../include/Engine.hpp"
+#include "../include/Widget.hpp"
 
 const char _classes[] = "Rectangle\0Rounded\0Player\0Magnetic\0";
 

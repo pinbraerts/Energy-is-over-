@@ -118,22 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Display.cpp" />
-    <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Display.hpp" />
-    <ClInclude Include="Engine.hpp" />
-    <ClInclude Include="Input.hpp" />
-    <ClInclude Include="Math.hpp" />
-    <ClInclude Include="Physics.hpp" />
-    <ClInclude Include="Resources.hpp" />
-    <ClInclude Include="includes.hpp" />
-    <ClInclude Include="Widget.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="dame.data"/>
+    <None Include="dame.data" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="game.data">
@@ -144,6 +129,21 @@
     <ProjectReference Include="Objects\Objects.vcxproj">
       <Project>{d8d17ede-a5d6-493b-b2f8-161bb085c1e8}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\Display.cpp" />
+    <ClCompile Include="source\Engine.cpp" />
+    <ClCompile Include="source\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Display.hpp" />
+    <ClInclude Include="include\Engine.hpp" />
+    <ClInclude Include="include\includes.hpp" />
+    <ClInclude Include="include\Input.hpp" />
+    <ClInclude Include="include\Math.hpp" />
+    <ClInclude Include="include\Physics.hpp" />
+    <ClInclude Include="include\Resources.hpp" />
+    <ClInclude Include="include\Widget.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

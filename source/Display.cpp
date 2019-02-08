@@ -1,6 +1,6 @@
-#include "Display.hpp"
+#include "../include/Display.hpp"
 
-#include "Engine.hpp"
+#include "../include/Engine.hpp"
 
 void Display::create_window(Engine & e, int nCmdShow) {
 #if 1

@@ -1,4 +1,4 @@
-#include "Engine.hpp"
+#include "../include/Engine.hpp"
 
 LRESULT Engine::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     Engine* sys = (Engine*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
