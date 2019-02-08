@@ -23,6 +23,9 @@
     <None Include="Objects.def">
       <Filter>Исходные файлы</Filter>
     </None>
+    <None Include="Objects64.def">
+      <Filter>Исходные файлы</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Objects.hpp">

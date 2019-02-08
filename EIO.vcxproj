@@ -133,7 +133,12 @@
     <ClInclude Include="Widget.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="game.data" />
+    <None Include="dame.data"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="game.data">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Objects\Objects.vcxproj">
