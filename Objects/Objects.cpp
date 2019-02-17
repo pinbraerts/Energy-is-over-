@@ -105,10 +105,14 @@ void Player::render(Engine & e) {
             energy = 0;
             // energy is out -- EIO!!!
         }
-        float module_speed = 100;
+        float photon_mass = 1.0f;
+        float module_speed = 200;
         D2D1_VECTOR_2F vec = module_speed * direction;
-        speed -= vec;
-        photons.emplace_back(*this + direction * (radius + photon_quant), 2 * vec);
+        photons.emplace_back(*this + direction * (radius + photon_quant), vec);
+        float ratio1 = abs(speed / module_speed);
+        D2D1_VECTOR_2F k = +(speed / sqrt(1 - ratio1 * ratio1) - photon_mass*vec);
+        float new_speed_modulo = sqrt(abs(k) * abs(k) / (1 + abs(k)*abs(k) / (module_speed*module_speed)));
+        speed = new_speed_modulo * normalize(k);
         last_photon_time = e.physics.current_time;
     }
     else {

@@ -26,7 +26,7 @@ inline D2D1_VECTOR_2F operator*(D2D1_VECTOR_2F a, float m) {
 }
 
 inline D2D1_VECTOR_2F operator/(D2D1_VECTOR_2F a, float m) {
-    return { m / a.x, m / a.y };
+    return { a.x / m, a.y / m };
 }
 
 inline D2D1_VECTOR_2F operator*(float m, D2D1_VECTOR_2F a) {
