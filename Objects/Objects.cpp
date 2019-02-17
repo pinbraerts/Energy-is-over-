@@ -107,8 +107,8 @@ void Player::render(Engine & e) {
         }
         float module_speed = 100;
         D2D1_VECTOR_2F vec = module_speed * direction;
-        speed -= vec;
-        photons.emplace_back(*this + direction * (radius + photon_quant), 2 * vec);
+        photons.emplace_back(*this + direction * (radius + photon_quant), speed + 2 * vec);
+		speed -= vec;
         last_photon_time = e.physics.current_time;
     }
     else {
