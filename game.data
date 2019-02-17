@@ -3,4 +3,3 @@ import Objects
 Rectangle 10 10 120 120 Green
 Rectangle 10 600 150 760 Salmon
 Player 1000 500 30 Aqua
-Magnetic 300 300 1300 1300 1 Red
