@@ -135,16 +135,21 @@ void Engine::render() {
     target.SetTransform(D2D1::Matrix3x2F::Identity());
     target.Clear(D2D1::ColorF(D2D1::ColorF::White));
 
-    for (auto& widget : widgets)
-        widget->render(*this);
-    // draw children here
+    try {
+        for (auto& widget : widgets)
+            widget->render(*this);
+        // draw children here
 
-    HRESULT hr;
-    hr = target.EndDraw();
+        HRESULT hr;
+        hr = target.EndDraw();
 
-    if (hr == D2DERR_RECREATE_TARGET)
+        if (hr == D2DERR_RECREATE_TARGET)
+            release_dependent();
+        else CHECK;
+    }
+    catch (Quit) {
         release_dependent();
-    else CHECK;
+    }
 
     auto end = std::chrono::system_clock::now();
     std::chrono::duration<float> dur = end - start;
@@ -154,6 +159,7 @@ void Engine::render() {
 
 void Engine::quit() {
     PostQuitMessage(0);
+    throw Quit{};
 }
 
 Engine::~Engine() {

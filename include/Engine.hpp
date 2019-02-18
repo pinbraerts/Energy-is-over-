@@ -30,6 +30,8 @@ public:
     void button_down();
     void button_up();
     void render();
+
+    struct Quit {};
     void quit();
 
     ID2D1Factory* directFactory;
