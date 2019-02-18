@@ -14,6 +14,10 @@ struct Imaging {
             IID_PPV_ARGS(&factory)
         );
     }
+
+    ~Imaging() {
+        factory->Release();
+    }
 };
 
 class ImageBuilder {
