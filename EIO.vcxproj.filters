@@ -9,11 +9,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{5d919609-0ccc-424e-aff0-2b28733f2e27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\main.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="source\Display.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -22,24 +22,32 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Widget.hpp" />
-    <ClInclude Include="include\Display.hpp" />
-    <ClInclude Include="include\Engine.hpp" />
-    <ClInclude Include="include\includes.hpp" />
-    <ClInclude Include="include\Input.hpp" />
-    <ClInclude Include="include\Math.hpp" />
-    <ClInclude Include="include\Physics.hpp" />
-    <ClInclude Include="include\Resources.hpp" />
-    <ClInclude Include="include\Imaging.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="game.data">
-      <Filter>Файлы ресурсов</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="some.png">
-      <Filter>Файлы ресурсов</Filter>
-    </Image>
+    <ClInclude Include="include\Widget.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Display.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Imaging.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\includes.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Input.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Physics.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Resources.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
