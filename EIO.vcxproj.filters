@@ -11,11 +11,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="dame.data">
-      <Filter>Файлы ресурсов</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="source\main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -35,5 +30,16 @@
     <ClInclude Include="include\Math.hpp" />
     <ClInclude Include="include\Physics.hpp" />
     <ClInclude Include="include\Resources.hpp" />
+    <ClInclude Include="include\Imaging.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="game.data">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="some.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>
