@@ -23,10 +23,8 @@
     <None Include="game.data">
       <Filter>Файлы ресурсов</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="some.png">
+    <None Include="some.png">
       <Filter>Файлы ресурсов</Filter>
-    </Image>
+    </None>
   </ItemGroup>
 </Project>

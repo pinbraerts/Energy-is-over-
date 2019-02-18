@@ -4,27 +4,19 @@
 #include "../include/Engine.hpp"
 #include "../include/Widget.hpp"
 
-const char _classes[] = "Rectangle\0Rounded\0Player\0Magnetic\0";
+IWidget* factoryFinish(std::istream& s);
+IWidget* factoryPlayer(std::istream& s);
+IWidget* factoryMagnetic(std::istream& s);
 
-struct Rect : IWidget, D2D1_RECT_F {
+constexpr char _classes[] = "Finish\0Player\0Magnetic\0";
+const char* info();
+
+struct Finish: IWidget, D2D1_RECT_F {
     using D2D1_RECT_F::D2D1_RECT_F;
 
-    Rect(std::istream& s);
+    Finish(std::istream& s);
 
     D2D1::ColorF color;
-    ID2D1Brush* b = nullptr;
-
-    void load(Engine& e) override;
-    void render(Engine& e) override;
-    void Release() override;
-};
-
-struct RoundedRect : IWidget, D2D1_ROUNDED_RECT {
-    using D2D1_ROUNDED_RECT::D2D1_ROUNDED_RECT;
-
-    RoundedRect(std::istream& s);
-
-    D2D1::ColorF color = D2D1::ColorF::Black;
     ID2D1Brush* b = nullptr;
 
     void load(Engine& e) override;
@@ -54,16 +46,19 @@ struct Player: IWidget, D2D1_POINT_2F, IBody {
         void render(Engine& e, Player& p);
     };
     std::vector<Photon> photons;
+
     float last_photon_time = -10;
     float time_between_photons = 0.5f;
     float photon_quant = 100;
     float photon_radius = 10;
+    float photon_mass = 1.0f;
+    float photon_speed = 200;
 };
 
 struct Magnetic: IWidget, D2D1_RECT_F {
     constexpr static float Constant = 0.5f;
 
-    float field;
+    float induction;
 
     Magnetic(std::istream& s);
 
@@ -74,11 +69,5 @@ struct Magnetic: IWidget, D2D1_RECT_F {
     void render(Engine& e) override;
     void Release() override;
 };
-
-IWidget* factoryRectangle(std::istream& s);
-IWidget* factoryRounded(std::istream& s);
-IWidget* factoryPlayer(std::istream& s);
-IWidget* factoryMagnetic(std::istream& s);
-const char* info();
 
 #endif // !EIO_OBJECTS_HPP

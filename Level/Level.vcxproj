@@ -22,9 +22,9 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D8D17EDE-A5D6-493B-B2F8-161BB085C1E8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Geometry</RootNamespace>
+    <RootNamespace>Level</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
-    <ProjectName>Objects</ProjectName>
+    <ProjectName>Level</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -96,7 +96,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Objects.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Level.def</ModuleDefinitionFile>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
@@ -113,7 +113,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Objects64.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Level64.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -133,7 +133,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Objects.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Level.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -153,18 +153,23 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Objects64.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>Level64.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Objects.cpp" />
+    <ClCompile Include="Level.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Objects.hpp" />
+    <ClInclude Include="Level.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Objects.def" />
-    <None Include="Objects64.def" />
+    <None Include="Level.def" />
+    <None Include="Level64.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EIO.vcxproj">
+      <Project>{051e0545-1ebb-4e58-b6bb-e0ee6d9791b0}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

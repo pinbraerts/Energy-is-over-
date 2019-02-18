@@ -1,6 +1,6 @@
-import Objects
+import Level
 
 Image 10 10 1000 1000 some.png
-Rectangle 10 600 150 760 Salmon
+Finish 10 600 150 760 Salmon
 Player 1000 500 30 Aqua
 Magnetic 300 300 1300 1300 1 Red

@@ -15,20 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Objects.cpp">
+    <None Include="Level.def">
+      <Filter>Исходные файлы</Filter>
+    </None>
+    <None Include="Level64.def">
+      <Filter>Исходные файлы</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Level.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Objects.def">
-      <Filter>Исходные файлы</Filter>
-    </None>
-    <None Include="Objects64.def">
-      <Filter>Исходные файлы</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Objects.hpp">
+    <ClInclude Include="Level.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
