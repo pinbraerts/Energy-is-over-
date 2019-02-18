@@ -9,6 +9,11 @@ constexpr float pi = 3.14159265358979323846f;
 constexpr float deg2rad = pi / 180;
 constexpr float rad2deg = 180 / pi;
 
+template<class T>
+inline T sqr(T x) {
+    return x * x;
+}
+
 inline D2D1_VECTOR_2F operator+(D2D1_VECTOR_2F a, D2D1_VECTOR_2F b) {
     return { a.x + b.x, a.y + b.y };
 }
