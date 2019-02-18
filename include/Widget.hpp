@@ -8,6 +8,10 @@ struct IWidget {
     virtual void render(Engine& e) = 0;
     // virtual void physics(Engine& e) {}
     virtual void Release() = 0;
+
+    ~IWidget() {
+        Release();
+    }
 };
 
 static D2D1::ColorF str2color(std::string str) {
