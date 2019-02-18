@@ -124,7 +124,7 @@
     <ProjectReference Include="..\Imaging\Imaging.vcxproj">
       <Project>{f4016711-ad7b-4baf-9df8-7b7583e37a5d}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\Objects\Objects.vcxproj">
+    <ProjectReference Include="..\Level\Level.vcxproj">
       <Project>{d8d17ede-a5d6-493b-b2f8-161bb085c1e8}</Project>
     </ProjectReference>
   </ItemGroup>

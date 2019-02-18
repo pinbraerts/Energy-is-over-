@@ -1,4 +1,4 @@
-﻿#include "Objects.hpp"
+﻿#include "Level.hpp"
 
 #if 0
 EXPORT BOOL WINAPI DllMain(
@@ -14,47 +14,26 @@ const char* info() {
     return _classes;
 }
 
-Rect::Rect(std::istream & s): color(D2D1::ColorF::White) {
+Finish::Finish(std::istream & s): color(D2D1::ColorF::White) {
     s >> left >> top >> right >> bottom >> color;
 }
 
-void Rect::load(Engine & e) {
+void Finish::load(Engine & e) {
     HRESULT hr = e.display.renderTarget->CreateSolidColorBrush(color, (ID2D1SolidColorBrush**)&b);
     CHECK;
 }
 
-void Rect::render(Engine & e) {
+void Finish::render(Engine & e) {
     auto& t = *e.display.renderTarget;
     t.FillRectangle(*this, b);
 }
 
-void Rect::Release() {
+void Finish::Release() {
     release(b);
 }
 
-RoundedRect::RoundedRect(std::istream & s): color(D2D1::ColorF::White) {
-    s >> rect.left >> rect.top >> rect.right >> rect.bottom >> radiusX >> radiusY >> color;
-}
-
-void RoundedRect::load(Engine & e) {
-    HRESULT hr = e.display.renderTarget->CreateSolidColorBrush(color, (ID2D1SolidColorBrush**)&b);
-    CHECK;
-}
-
-void RoundedRect::render(Engine & e) {
-    auto& t = *e.display.renderTarget;
-    t.DrawRoundedRectangle(*this, b);
-}
-
-void RoundedRect::Release() {
-    release(b);
-}
-
-IWidget* factoryRectangle(std::istream & s) {
-    return new Rect(s);
-}
-IWidget* factoryRounded(std::istream& s) {
-    return new RoundedRect(s);
+IWidget* factoryFinish(std::istream & s) {
+    return new Finish(s);
 }
 IWidget* factoryPlayer(std::istream & s) {
     return new Player(s);
@@ -103,19 +82,18 @@ void Player::render(Engine & e) {
         energy -= 0.1f;
         if (energy < 0) {
             energy = 0;
+            return e.quit();
             // energy is out -- EIO!!!
         }
-        float photon_mass = 1.0f;
-        float module_speed = 200;
-        D2D1_VECTOR_2F vec = module_speed * direction;
+        D2D1_VECTOR_2F vec = photon_speed * direction;
         photons.emplace_back(*this + direction * (radius + photon_quant), vec);
-        D2D1_VECTOR_2F k = +(speed / sqrt(1 - sqr(abs(speed) / module_speed)) - photon_mass*vec);
-        float new_speed_modulo = sqrt(sqr(abs(k)) / (1 + sqr(abs(k)/module_speed)));
+        D2D1_VECTOR_2F k = +(speed / sqrt(1 - sqr(abs(speed) / photon_speed)) - photon_mass*vec);
+        float new_speed_modulo = sqrt(sqr(abs(k)) / (1 + sqr(abs(k)/photon_speed)));
         speed = new_speed_modulo * normalize(k);
         last_photon_time = e.physics.current_time;
     }
     else {
-        // speed *= 0.999f;
+        // friction: speed *= 0.999f;
     }
 
     // draw bubble
@@ -147,22 +125,19 @@ void Player::Release() {
 }
 
 void Player::check_collisions(Engine& e, const IWidget& other) {
-    if (const Rect* r = dynamic_cast<const Rect*>(&other)) {
+    if (const Finish* r = dynamic_cast<const Finish*>(&other)) {
         if (abs(nearest(*r, *this) - *this) <= radius) {
-            energy += 0.005f;
-            if (energy > 1)
-                energy = 1;
+            return e.quit();
         }
     }
     else if (const Magnetic* m = dynamic_cast<const Magnetic*>(&other)) {
         if (abs(nearest(*m, *this) - *this) <= radius)
-            speed += Magnetic::Constant * m->field * right_perpendicular(speed) * e.physics.delta_time;
+            speed += Magnetic::Constant * m->induction * right_perpendicular(speed) * e.physics.delta_time;
     }
 }
 
-
 Magnetic::Magnetic(std::istream & s) : color(D2D1::ColorF::White) {
-    s >> left >> top >> right >> bottom >> field >> color;
+    s >> left >> top >> right >> bottom >> induction >> color;
 }
 
 void Magnetic::load(Engine & e) {
@@ -180,7 +155,7 @@ void Magnetic::render(Engine& e) {
         p.x = left + 10;
         for (size_t j = 0; j < 10; ++j) {
             target->DrawEllipse(D2D1::Ellipse(p, 10, 10), b);
-            if (field > 0) {
+            if (induction > 0) {
                 target->FillEllipse(D2D1::Ellipse(p, 1, 1), b);
             }
             else {

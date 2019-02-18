@@ -1,7 +1,6 @@
 LIBRARY
 EXPORTS
 	info=?info@@YAPBDXZ
-	factoryRectangle=?factoryRectangle@@YAPAUIWidget@@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z
-	factoryRounded=?factoryRounded@@YAPAUIWidget@@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z
+	factoryFinish=?factoryFinish@@YAPAUIWidget@@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z
 	factoryPlayer=?factoryPlayer@@YAPAUIWidget@@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z
 	factoryMagnetic=?factoryMagnetic@@YAPAUIWidget@@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z
