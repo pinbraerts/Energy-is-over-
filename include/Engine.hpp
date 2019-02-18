@@ -30,6 +30,7 @@ public:
     void button_down();
     void button_up();
     void render();
+    void quit();
 
     ID2D1Factory* directFactory;
 

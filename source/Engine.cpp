@@ -152,6 +152,10 @@ void Engine::render() {
     physics.current_time += physics.delta_time;
 }
 
+void Engine::quit() {
+    PostQuitMessage(0);
+}
+
 Engine::~Engine() {
     release_dependent();
     for (auto& widget : widgets)
