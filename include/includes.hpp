@@ -40,6 +40,11 @@ void release(T*& i) {
     }
 }
 
+static std::wstring stows(std::string s) {
+    std::wstring res(s.begin(), s.end());
+    return res;
+}
+
 struct Engine;
 
 #endif // !EIO_INCLUDES_HPP

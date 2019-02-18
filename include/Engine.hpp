@@ -5,6 +5,7 @@
 #include "Display.hpp"
 #include "Physics.hpp"
 #include "Widget.hpp"
+#include "Imaging.hpp"
 
 struct Engine: public WNDCLASSEX {
 public:
@@ -31,12 +32,12 @@ public:
     void render();
 
     ID2D1Factory* directFactory;
-    // IWICImagingFactory* imagingFactory;
 
     std::vector<IWidget*> widgets;
     Display display;
     Input input;
     Physics physics;
+    Imaging imaging;
 
     ~Engine();
 };
