@@ -1,5 +1,5 @@
 #ifndef IMAGE_HPP
-#define IMAGIEHPP
+#define IMAGE_HPP
 
 #include "../include/Engine.hpp"
 #include "../include/Widget.hpp"
