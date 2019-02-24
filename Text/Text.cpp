@@ -24,7 +24,9 @@ void Text::load(Engine & e) {
 
 void Text::render(Engine& e) {
     auto& target = *e.display.renderTarget;
-    //target.DrawBitmap(bmp, *this);
+    D2D1::Matrix3x2F tr;
+    target.GetTransform(&tr); // to use truly text size
+    target.SetTransform(D2D1::Matrix3x2F::Identity());
     target.DrawText(
         text.c_str(),
         (UINT32)text.size(),
@@ -32,6 +34,7 @@ void Text::render(Engine& e) {
         *this, 
         b
     );
+    target.SetTransform(tr);
 }
 
 void Text::Release() {

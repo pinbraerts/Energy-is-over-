@@ -1,11 +1,12 @@
 import Level
 
-Finish 0 0 2048 100 Salmon
-Finish 0 300 1800 400 Salmon
-Finish 100 600 2048 700 Salmon
-Magnetic 1700 0 2000 700 -1.5 Red
-Magnetic 0 300 200 1000 1.5 Blue
-Finish 1700 800 2000 1100 Green
-Player 200 200 30 Aqua
+Image 0 0 100 100 some.png
+Finish 0 0 200 10 Salmon
+Finish 0 40 160 50 Salmon
+Finish 20 80 200 90 Salmon
+Magnetic 150 5 200 85 -1.5 Red
+Magnetic 0 45 30 130 1.5 Blue
+Finish 150 90 200 130 Green
+Player 20 20 3 Cyan
 
 Text 0 0 1000 100 Black some.png
