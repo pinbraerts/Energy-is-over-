@@ -47,12 +47,12 @@ struct Player: IWidget, D2D1_POINT_2F, IBody {
     };
     std::vector<Photon> photons;
 
-    float last_photon_time = -10;
+    float last_photon_time = -10.0f;
     float time_between_photons = 0.5f;
-    float photon_quant = 100;
-    float photon_radius = 10;
+    float photon_quant = 10;
+    float photon_radius = 1;
     float photon_mass = 1.0f;
-    float photon_speed = 200;
+    float photon_speed = 20;
 };
 
 struct Magnetic: IWidget, D2D1_RECT_F {
