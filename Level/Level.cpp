@@ -63,7 +63,7 @@ void Player::render(Engine & e) {
 
     *this += e.physics.delta_time * speed;
 
-    D2D1_VECTOR_2F direction = +e.input - *this;
+    D2D1_VECTOR_2F direction = e.input - *this;
     normalize(direction);
 
     for (size_t i = 0; i < photons.size(); ++i) {
@@ -106,7 +106,7 @@ void Player::render(Engine & e) {
     D2D1_POINT_2F rad{ x + radius * cos(angle), y - radius * sin(angle) };
 
     sink->BeginFigure(rad, D2D1_FIGURE_BEGIN_FILLED);
-    rad.x = 2 * x - rad.x - 0.1f; // 0.1 -- to make points different when angle = 0
+    rad.x = 2 * x - rad.x - 0.001f; // 0.001 -- to make points different when angle = 0
     sink->AddArc(D2D1::ArcSegment(rad, D2D1::SizeF(radius, radius), 0, D2D1_SWEEP_DIRECTION_CLOCKWISE, angle > 0 ? D2D1_ARC_SIZE_LARGE : D2D1_ARC_SIZE_SMALL));
 
     sink->EndFigure(D2D1_FIGURE_END_CLOSED);
@@ -114,9 +114,9 @@ void Player::render(Engine & e) {
     target.FillGeometry(bubble, a);
     release(bubble);
     release(sink);
-
-    target.DrawEllipse(D2D1::Ellipse(*this, radius, radius), a);
-    if(can_throw_photon)
+    
+    target.DrawEllipse(D2D1::Ellipse(*this, radius, radius), a, e.thikness);
+    if (can_throw_photon)
         target.FillEllipse(D2D1::Ellipse(*this + radius * direction, photon_radius, photon_radius), b);
 }
 
@@ -147,20 +147,24 @@ void Magnetic::load(Engine & e) {
 
 void Magnetic::render(Engine& e) {
     auto& target = e.display.renderTarget;
-    D2D1_POINT_2F p { left + 10, top + 10 };
 
-    float dx = (right - left - 20) / 10, dy = (bottom - top - 20) / 10;
+    float padding = 0.5f;
+    D2D1_POINT_2F p { left + 2 * padding, top + 2 * padding };
+
+    float dx = (right - left - 2 * padding) / 9, dy = (bottom - top - 2 * padding) / 9;
 
     for (size_t i = 0; i < 10; ++i) {
-        p.x = left + 10;
+        p.x = left + padding;
         for (size_t j = 0; j < 10; ++j) {
-            target->DrawEllipse(D2D1::Ellipse(p, 10, 10), b);
+            float d = 1;
+            target->DrawEllipse(D2D1::Ellipse(p, d, d), b, e.thikness);
             if (induction > 0) {
-                target->FillEllipse(D2D1::Ellipse(p, 1, 1), b);
+                target->FillEllipse(D2D1::Ellipse(p, d / 10, d / 10), b);
             }
             else {
-                target->DrawLine(D2D1::Point2F(p.x - 5, p.y - 5), D2D1::Point2F(p.x + 5, p.y + 5), b);
-                target->DrawLine(D2D1::Point2F(p.x - 5, p.y + 5), D2D1::Point2F(p.x + 5, p.y - 5), b);
+                float dimen = d / sqrt(2.0f);
+                target->DrawLine(D2D1::Point2F(p.x - dimen, p.y - dimen), D2D1::Point2F(p.x + dimen, p.y + dimen), b, e.thikness);
+                target->DrawLine(D2D1::Point2F(p.x - dimen, p.y + dimen), D2D1::Point2F(p.x + dimen, p.y - dimen), b, e.thikness);
             }
             p.x += dx;
         }
@@ -190,8 +194,9 @@ void Player::Photon::render(Engine& e, Player& p) {
     tail->Open(&sink);
     sink->BeginFigure(point, D2D1_FIGURE_BEGIN_HOLLOW);
 
-    for (float dist = 0; dist < p.photon_quant; dist += 0.1f) {
-        float perp_module = 7 * sin(10 * e.physics.current_time + dist / 4);
+    for (float dist = 0; dist < p.photon_quant; dist += 0.01f) {
+        float perp_module = 0.5f;
+        perp_module *= -sin(10 * e.physics.current_time + dist * 2);
         point = *this + dist * direction + perp_module * perpendicular;
         sink->AddLine(point);
     }
@@ -199,7 +204,7 @@ void Player::Photon::render(Engine& e, Player& p) {
     sink->EndFigure(D2D1_FIGURE_END_OPEN);
     sink->Close();
 
-    e.display.renderTarget->DrawGeometry(tail, p.b);
+    e.display.renderTarget->DrawGeometry(tail, p.b, e.thikness);
 
     release(tail);
     release(sink);
