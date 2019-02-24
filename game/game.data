@@ -8,3 +8,5 @@ Magnetic 150 5 200 85 -1.5 Red
 Magnetic 0 45 30 130 1.5 Blue
 Finish 150 90 200 130 Green
 Player 20 20 3 Cyan
+
+Text 0 0 1000 100 Black some.png

@@ -127,6 +127,9 @@
     <ProjectReference Include="..\Level\Level.vcxproj">
       <Project>{d8d17ede-a5d6-493b-b2f8-161bb085c1e8}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Text\Text.vcxproj">
+      <Project>{4116215a-6a45-42fc-ab64-f25abe7295f0}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="game.data">
