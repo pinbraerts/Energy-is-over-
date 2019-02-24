@@ -44,6 +44,10 @@ public:
     Imaging imaging;
     Texting texting;
 
+    float meter2dip = 10;
+    D2D1::Matrix3x2F screen2world;
+    float thikness = 1;
+
     ~Engine();
 };
 

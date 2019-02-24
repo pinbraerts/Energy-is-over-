@@ -72,6 +72,12 @@ void Engine::load_dependent() {
     );
     CHECK;
 
+    float dx, dy;
+    display.renderTarget->GetDpi(&dx, &dy);
+    meter2dip *= (96 + 96) / (dx + dy);
+
+    thikness /= meter2dip;
+
     for (auto& widget : widgets)
         widget->load(*this);
 }
@@ -115,8 +121,7 @@ int Engine::run() {
 }
 
 void Engine::mouse_move(UINT x, UINT y) {
-    input.x = (float)x;
-    input.y = (float)y;
+    input = screen2world.TransformPoint({ (float)x, (float)y });
 }
 void Engine::button_down() {
     input.button = true;
@@ -132,7 +137,9 @@ void Engine::render() {
     auto& target = *display.renderTarget;
 
     target.BeginDraw();
-    target.SetTransform(D2D1::Matrix3x2F::Identity());
+    screen2world = D2D1::Matrix3x2F::Scale(meter2dip, meter2dip);
+    target.SetTransform(screen2world);
+    screen2world.Invert();
     target.Clear(D2D1::ColorF(D2D1::ColorF::White));
 
     try {
