@@ -2,6 +2,7 @@
 #define EIO_ENGINE_HPP
 
 #include "Input.hpp"
+#include "Texting.hpp"  
 #include "Display.hpp"
 #include "Physics.hpp"
 #include "Widget.hpp"
@@ -41,6 +42,7 @@ public:
     Input input;
     Physics physics;
     Imaging imaging;
+    Texting texting;
 
     ~Engine();
 };
