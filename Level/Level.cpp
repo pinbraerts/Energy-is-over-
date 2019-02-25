@@ -63,7 +63,11 @@ void Player::render(Engine & e) {
 
     *this += e.physics.delta_time * speed;
 
-    D2D1_VECTOR_2F direction = e.input - *this;
+    D2D1_VECTOR_2F direction;
+    if (e.input.gamepad.connected())
+        direction = e.input.gamepad.left_stick();
+    else
+        direction = e.input.mouse - *this;
     normalize(direction);
 
     for (size_t i = 0; i < photons.size(); ++i) {
@@ -77,8 +81,8 @@ void Player::render(Engine & e) {
             photons[i].render(e, *this);
     }
 
-    bool can_throw_photon = e.physics.current_time - last_photon_time > time_between_photons;
-    if (e.input.button && energy != 0 && can_throw_photon) {
+    bool can_throw_photon = (e.physics.current_time - last_photon_time > time_between_photons) && abs(direction) != 0;
+    if (e.input.mouse.button && energy != 0 && can_throw_photon) {
         energy -= 0.1f;
         if (energy < 0) {
             energy = 0;

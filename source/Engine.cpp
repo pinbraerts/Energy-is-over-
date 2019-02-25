@@ -121,16 +121,23 @@ int Engine::run() {
 }
 
 void Engine::mouse_move(UINT x, UINT y) {
-    input = screen2world.TransformPoint({ (float)x, (float)y });
+    input.mouse = screen2world.TransformPoint({ (float)x, (float)y });
 }
 void Engine::button_down() {
-    input.button = true;
+    input.mouse.button = true;
 }
 void Engine::button_up() {
-    input.button = false;
+    input.mouse.button = false;
 }
 
 void Engine::render() {
+    input.gamepad.update_state();
+
+    if (input.gamepad.connected()) {
+        input.mouse = +input.gamepad.left_stick();
+        input.mouse.button = input.gamepad.pressed(Gamepad::Button::A);
+    }
+
     auto start = std::chrono::system_clock::now();
 
     load_dependent();

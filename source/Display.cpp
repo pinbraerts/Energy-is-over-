@@ -27,9 +27,8 @@ void Display::create_window(Engine & e, int nCmdShow) {
     if (handle == nullptr)
         throw std::runtime_error("Call to CreateWindow failed!");
     ShowWindow(handle, nCmdShow);
-    e.input.x = left + centerX();
-    e.input.y = top + centerY();
-    SetCursorPos((int)e.input.x, (int)e.input.y);
+    e.input.mouse = { left + centerX(), top + centerY() };
+    SetCursorPos((int)e.input.mouse.x, (int)e.input.mouse.y);
     UpdateWindow(handle);
     // SetWindowPos(handle, nullptr, left, top, width(), height(), SWP_FRAMECHANGED);
 }

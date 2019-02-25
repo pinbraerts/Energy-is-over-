@@ -52,5 +52,6 @@
     <ClInclude Include="include\Texting.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="include\Gamepad.hpp" />
   </ItemGroup>
 </Project>
