@@ -1,10 +1,8 @@
 #include "Text.hpp"
 
-Text::Text(std::istream & s) {
+Text::Text(std::wistream & s) {
     s >> left >> top >> right >> bottom >> color >> std::ws;
-    std::string cs;
-    std::getline(s, cs);
-    text = stows(cs);
+    std::getline(s, text);
 }
 
 void Text::load(Engine & e) {
@@ -41,6 +39,6 @@ void Text::Release() {
     release(format);
 }
 
-IWidget* factory(std::istream & s) {
+IWidget* factory(std::wistream & s) {
     return new Text(s);
 }

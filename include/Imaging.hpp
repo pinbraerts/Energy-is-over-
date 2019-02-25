@@ -30,7 +30,7 @@ private:
     IWICBitmapSource* res = nullptr;
 
 public:
-    ImageBuilder(std::string s, IWICImagingFactory* imf) : ImageBuilder(stows(s).c_str(), imf) {}
+    ImageBuilder(std::wstring s, IWICImagingFactory* imf) : ImageBuilder(s.c_str(), imf) {}
     ImageBuilder(LPCWSTR uri, IWICImagingFactory* imf) : imagingFactory(*imf) {
         HRESULT hr;
         hr = imagingFactory.CreateDecoderFromFilename(

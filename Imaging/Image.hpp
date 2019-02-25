@@ -8,15 +8,15 @@
 struct Image: IWidget, D2D1_RECT_F {
     ID2D1Bitmap* bmp;
 
-    std::string name;
+    std::wstring name;
 
-    Image(std::istream& s);
+    Image(std::wistream& s);
 
     void load(Engine& e) override;
     void render(Engine& e) override;
     void Release() override;
 };
 
-IWidget* factory(std::istream& s);
+IWidget* factory(std::wistream& s);
 
 #endif // !IMAGE_HPP

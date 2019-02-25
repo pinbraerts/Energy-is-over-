@@ -1,6 +1,6 @@
 #include "Image.hpp"
 
-Image::Image(std::istream & s) {
+Image::Image(std::wistream & s) {
     s >> left >> top >> right >> bottom >> std::ws;
     std::getline(s, name);
 }
@@ -19,6 +19,6 @@ void Image::Release() {
     release(bmp);
 }
 
-IWidget* factory(std::istream & s) {
+IWidget* factory(std::wistream & s) {
     return new Image(s);
 }

@@ -4,28 +4,28 @@
 #include "Widget.hpp"
 
 struct Resources {
-    std::map<std::string, HMODULE> modules;
-    std::map<std::string, Factory> factories;
+    std::map<std::wstring, HMODULE> modules;
+    std::map<std::wstring, Factory> factories;
 
-    void load(std::string path, std::vector<IWidget*>& ws) {
-        std::ifstream source(path);
+    void load(std::wstring path, std::vector<IWidget*>& ws) {
+        std::wifstream source(path);
 
         while (source) {
-            std::string name;
+            std::wstring name;
             source >> name;
 
             if (name.empty()) return;
-            else if (name == "import") {
+            else if (name == L"import") {
                 source >> name;
-                HMODULE m = modules[name] = LoadLibrary((name + ".dll").c_str());
+                HMODULE m = modules[name] = LoadLibrary(name.append(L".dll").c_str());
                 Info i = (Info)GetProcAddress(m, "info");
                 if (i == nullptr)
-                    throw std::runtime_error(_com_error(GetLastError()).ErrorMessage());
+                    throw Error{};
                 const char* x = i();
                 while (x != nullptr && *x != '\0') {
                     size_t l = strlen(x);
 
-                    factories[x] = (Factory)GetProcAddress(m, std::string("factory").append(x).c_str());
+                    factories[stows(x)] = (Factory)GetProcAddress(m, std::string("factory").append(x).c_str());
 
                     x += l + 1;
                 }
@@ -38,13 +38,13 @@ struct Resources {
                 HMODULE m;
                 auto iter = modules.lower_bound(name);
                 if (iter == modules.end() || iter->first != name)
-                    m = modules.insert(iter, { name, LoadLibrary((name + ".dll").c_str()) })->second;
+                    m = modules.insert(iter, { name, LoadLibrary(name.append(L".dll").c_str()) })->second;
                 else
                     m = iter->second;
 
                 f = factories.insert(i1, { name, (Factory)GetProcAddress(m, "factory") })->second;
                 if (f == nullptr)
-                    throw std::runtime_error(_com_error(GetLastError()).ErrorMessage());
+                    throw Error{};
             }
             else
                 f = i1->second;

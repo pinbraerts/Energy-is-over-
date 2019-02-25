@@ -25,7 +25,7 @@
 
 struct IWidget;
 
-using Factory = IWidget* (*)(std::istream&);
+using Factory = IWidget* (*)(std::wistream&);
 using Info = const char* (*)();
 
 #ifdef USE_EXPORTS
@@ -46,6 +46,17 @@ static std::wstring stows(std::string s) {
     std::wstring res(s.begin(), s.end());
     return res;
 }
+
+struct Error {
+    std::wstring message;
+    int err_no;
+
+    Error(const std::wstring& msg, int err_number = 1) : message(msg), err_no(err_number) {}
+    Error(std::wstring&& msg, int err_number = 1) : message(std::move(msg)), err_no(err_number) {}
+    Error(HRESULT hr): Error(_com_error(hr)) {}
+    Error(_com_error&& e): message(e.ErrorMessage()), err_no(e.WCode()) {}
+    Error(): Error(GetLastError()) {}
+};
 
 struct Engine;
 
