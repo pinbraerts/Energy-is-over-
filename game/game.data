@@ -1,4 +1,4 @@
-import Level
+﻿import Level
 
 Image 0 0 100 100 some.png
 Finish 0 0 200 10 Salmon
@@ -9,4 +9,4 @@ Magnetic 0 45 30 130 1.5 Blue
 Finish 150 90 200 130 Green
 Player 20 20 3 Cyan
 
-Text 0 0 1000 100 Black some.png
+Text 0 0 1000 100 Black Текст на русском!!
