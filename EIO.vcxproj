@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClInclude Include="include\Display.hpp" />
     <ClInclude Include="include\Engine.hpp" />
+    <ClInclude Include="include\Gamepad.hpp" />
     <ClInclude Include="include\Imaging.hpp" />
     <ClInclude Include="include\includes.hpp" />
     <ClInclude Include="include\Input.hpp" />
