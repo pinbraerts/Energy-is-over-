@@ -140,4 +140,8 @@ inline D2D1_POINT_2F nearest(const D2D1_RECT_F& r, D2D1_POINT_2F p) {
     return p;
 }
 
+inline bool operator==(D2D1_VECTOR_2F a, D2D1_VECTOR_2F b) {
+    return a.x == b.x && a.y == b.y;
+}
+
 #endif // !EIO_MATH_HPP
