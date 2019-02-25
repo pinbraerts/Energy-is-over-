@@ -13,15 +13,15 @@ int CALLBACK _tWinMain(
         Engine e(hInst);
 
         Resources r;
-        r.load("game.data", e.widgets);
+        r.load(L"game.data", e.widgets);
 
         e.create_window(nCmdShow);
 
         res = e.run();
     }
-    catch (const std::runtime_error& e) {
-        MessageBoxA(nullptr, e.what(), "EIO", 0);
-        res = 1;
+    catch (const Error& err) {
+        MessageBox(nullptr, err.message.c_str(), L"EIO", MB_ICONEXCLAMATION | MB_OK);
+        res = err.err_no;
     }
     CoUninitialize();
     return res;

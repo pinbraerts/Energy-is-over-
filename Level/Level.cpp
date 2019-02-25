@@ -14,7 +14,7 @@ const char* info() {
     return _classes;
 }
 
-Finish::Finish(std::istream & s): color(D2D1::ColorF::White) {
+Finish::Finish(std::wistream & s): color(D2D1::ColorF::White) {
     s >> left >> top >> right >> bottom >> color;
 }
 
@@ -32,17 +32,17 @@ void Finish::Release() {
     release(b);
 }
 
-IWidget* factoryFinish(std::istream & s) {
+IWidget* factoryFinish(std::wistream & s) {
     return new Finish(s);
 }
-IWidget* factoryPlayer(std::istream & s) {
+IWidget* factoryPlayer(std::wistream & s) {
     return new Player(s);
 }
-IWidget* factoryMagnetic(std::istream & s) {
+IWidget* factoryMagnetic(std::wistream & s) {
     return new Magnetic(s);
 }
 
-Player::Player(std::istream & s) {
+Player::Player(std::wistream & s) {
     s >> x >> y >> radius >> color;
 }
 
@@ -136,7 +136,7 @@ void Player::check_collisions(Engine& e, const IWidget& other) {
     }
 }
 
-Magnetic::Magnetic(std::istream & s) : color(D2D1::ColorF::White) {
+Magnetic::Magnetic(std::wistream & s) : color(D2D1::ColorF::White) {
     s >> left >> top >> right >> bottom >> induction >> color;
 }
 

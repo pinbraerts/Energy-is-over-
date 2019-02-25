@@ -12,13 +12,13 @@ struct Text: IWidget, D2D1_RECT_F {
     D2D1::ColorF color = D2D1::ColorF::Black;
     std::wstring text;
 
-    Text(std::istream& s);
+    Text(std::wistream& s);
 
     void load(Engine& e) override;
     void render(Engine& e) override;
     void Release() override;
 };
 
-IWidget* factory(std::istream& s);
+IWidget* factory(std::wistream& s);
 
 #endif // !IMAGE_HPP

@@ -4,9 +4,9 @@
 #include "../include/Engine.hpp"
 #include "../include/Widget.hpp"
 
-IWidget* factoryFinish(std::istream& s);
-IWidget* factoryPlayer(std::istream& s);
-IWidget* factoryMagnetic(std::istream& s);
+IWidget* factoryFinish(std::wistream& s);
+IWidget* factoryPlayer(std::wistream& s);
+IWidget* factoryMagnetic(std::wistream& s);
 
 constexpr char _classes[] = "Finish\0Player\0Magnetic\0";
 const char* info();
@@ -14,7 +14,7 @@ const char* info();
 struct Finish: IWidget, D2D1_RECT_F {
     using D2D1_RECT_F::D2D1_RECT_F;
 
-    Finish(std::istream& s);
+    Finish(std::wistream& s);
 
     D2D1::ColorF color;
     ID2D1Brush* b = nullptr;
@@ -28,7 +28,7 @@ struct Player: IWidget, D2D1_POINT_2F, IBody {
     float radius;
     float energy = 1;
 
-    Player(std::istream& s);
+    Player(std::wistream& s);
 
     D2D1::ColorF color = D2D1::ColorF::Black;
     ID2D1Brush* b = nullptr;
@@ -60,7 +60,7 @@ struct Magnetic: IWidget, D2D1_RECT_F {
 
     float induction;
 
-    Magnetic(std::istream& s);
+    Magnetic(std::wistream& s);
 
     D2D1::ColorF color = D2D1::ColorF::Black;
     ID2D1Brush* b = nullptr;
