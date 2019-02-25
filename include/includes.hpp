@@ -11,6 +11,7 @@
 #pragma comment(lib, "d2d1")
 #pragma comment(lib, "dwrite")
 
+#include <codecvt>
 #include <stdexcept>
 #include <string>
 #include <vector>

@@ -10,6 +10,9 @@ int CALLBACK _tWinMain(
     int res;
     CoInitialize(nullptr);
     try {
+        std::locale loc(std::locale::classic(), new std::codecvt_utf8<wchar_t>());
+        std::locale::global(loc);
+
         Engine e(hInst);
 
         Resources r;
