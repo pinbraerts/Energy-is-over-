@@ -12,9 +12,9 @@ namespace UnitTester
 		
 		TEST_METHOD(SqrFunction)
 		{
-            Assert::AreEqual(sqr(3), 9);
-            Assert::AreEqual(sqr(0), 0);
-            Assert::AreEqual(sqr(-2.1f), 4.41f, 1.e-5f);
+            Assert::AreEqual(square(3), 9);
+            Assert::AreEqual(square(0), 0);
+            Assert::AreEqual(square(-2.1f), 4.41f, 1.e-5f);
 		}
 	};
 

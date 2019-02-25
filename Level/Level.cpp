@@ -91,8 +91,8 @@ void Player::render(Engine & e) {
         }
         D2D1_VECTOR_2F vec = photon_speed * direction;
         photons.emplace_back(*this + direction * (radius + photon_quant), vec);
-        D2D1_VECTOR_2F k = +(speed / sqrt(1 - sqr(abs(speed) / photon_speed)) - photon_mass*vec);
-        float new_speed_modulo = sqrt(sqr(abs(k)) / (1 + sqr(abs(k)/photon_speed)));
+        D2D1_VECTOR_2F k = +(speed / sqrt(1 - square(abs(speed) / photon_speed)) - photon_mass*vec);
+        float new_speed_modulo = sqrt(square(abs(k)) / (1 + square(abs(k)/photon_speed)));
         speed = new_speed_modulo * normalize(k);
         last_photon_time = e.physics.current_time;
     }
