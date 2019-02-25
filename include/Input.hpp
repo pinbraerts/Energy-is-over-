@@ -1,12 +1,16 @@
 #ifndef EIO_INPUT_HPP
 #define EIO_INPUT_HPP
 
-#include "includes.hpp"
+#include "Gamepad.hpp"
 
-struct Input: D2D1_POINT_2F {
-    bool button = false;
+struct Input {
+    struct Mouse: D2D1_POINT_2F {
+        using D2D1_POINT_2F::operator=;
+        
+        bool button = false;
+    } mouse;
 
-    using D2D1_POINT_2F::operator=;
+    Gamepad gamepad;
 };
 
 #endif // !EIO_INPUT_HPP
