@@ -9,7 +9,7 @@ struct Gamepad {
     XINPUT_STATE states[2];
     unsigned char current_state = 0;
     float dead_zone = 0.1f;
-    size_t id = XUSER_MAX_COUNT;
+    DWORD id = XUSER_MAX_COUNT;
 
     Gamepad() {
         try_reconnect();
@@ -37,7 +37,7 @@ struct Gamepad {
     void try_reconnect() {
         id = XUSER_MAX_COUNT;
 
-        for (size_t i = 0; i < XUSER_MAX_COUNT; ++i) {
+        for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i) {
             if (XInputGetState(i, &current()) == ERROR_SUCCESS) {
                 id = i;
             }
