@@ -96,9 +96,12 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Level.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>$(ProjectName)$(PlatformName).def</ModuleDefinitionFile>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <PreBuildEvent>
+      <Command>python $(SolutionDir)util\demangle.py $(ProjectName) $(PlatformName)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -113,8 +116,11 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Level64.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>$(ProjectName)$(PlatformName).def</ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>python $(SolutionDir)util\demangle.py $(ProjectName) $(PlatformName)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -133,8 +139,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Level.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>$(ProjectName)$(PlatformName).def</ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>python $(SolutionDir)util\demangle.py $(ProjectName) $(PlatformName)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -153,18 +162,17 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ModuleDefinitionFile>Level64.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>$(ProjectName)$(PlatformName).def</ModuleDefinitionFile>
     </Link>
+    <PreBuildEvent>
+      <Command>python $(SolutionDir)util\demangle.py $(ProjectName) $(PlatformName)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Level.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Level.def" />
-    <None Include="Level64.def" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EIO.vcxproj">
