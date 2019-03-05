@@ -54,4 +54,9 @@
     </ClInclude>
     <ClInclude Include="include\Gamepad.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="util\demangle.py">
+      <Filter>Исходные файлы</Filter>
+    </None>
+  </ItemGroup>
 </Project>

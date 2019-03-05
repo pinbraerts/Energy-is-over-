@@ -1,3 +1,0 @@
-LIBRARY
-EXPORTS
-	factory=?factory@@YAPAUIWidget@@AAV?$basic_istream@_WU?$char_traits@_W@std@@@std@@@Z
