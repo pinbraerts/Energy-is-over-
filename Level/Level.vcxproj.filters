@@ -15,14 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Level.def">
-      <Filter>Исходные файлы</Filter>
-    </None>
-    <None Include="Level64.def">
-      <Filter>Исходные файлы</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="Level.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>

@@ -133,6 +133,11 @@
     <ClInclude Include="include\Texting.hpp" />
     <ClInclude Include="include\Widget.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="util\demangle.py">
+      <FileType>Document</FileType>
+    </CustomBuild>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

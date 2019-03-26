@@ -24,12 +24,4 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Image.def">
-      <Filter>Исходные файлы</Filter>
-    </None>
-    <None Include="Image64.def">
-      <Filter>Исходные файлы</Filter>
-    </None>
-  </ItemGroup>
 </Project>
